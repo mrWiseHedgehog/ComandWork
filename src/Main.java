@@ -26,6 +26,19 @@ public class Main {
                 System.out.println("Your shopping cart:");
 
                 for (int i = 0; i < amountProduct.length; i++) {
+// The following code has been added to view make the basket clear
+                    if (amountProduct[i] == 0) {
+                        amountProduct[i] = 0;
+                        sumProducts += amountProduct[i];
+                        int sumCount = prices[i] * amountProduct[i];
+
+                        System.out.println(products[i] + " " +
+                                amountProduct[i] + " piece by " +
+                                prices[i] + " rub/piece, " +
+                                sumCount + " rub in total");
+                    }
+// Code end
+
                     if (amountProduct[i] != 0) {
                         sumProducts += amountProduct[i] * prices[i];
                         int sumCount = prices[i] * amountProduct[i];
@@ -48,8 +61,8 @@ public class Main {
                     System.out.println("More than two variables have been introduced");
                     continue;
                 }
-                if (countProd <= 0) {
-                    System.out.println("incorrect input of the product quantity");
+                if (countProd == 0) {
+                    amountProduct[numProd] = countProd; // Product[i] in basket equals zero
                     continue;
                 }
                 amountProduct[numProd] += countProd;
