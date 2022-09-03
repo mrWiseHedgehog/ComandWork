@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
 
         String[] products = {"Bread", "Apples", "Milk"}; //Normal
@@ -35,6 +36,20 @@ public class Main {
                 System.out.println("The program is completed!");
                 System.out.println("Your shopping cart:");
 
+                for (int i = 0; i < (amountProduct.length - productsEvent.length); i++) { // ++
+// The following code has been added to view make the basket clear
+                    //      if (amountProduct[i] == 0) {
+                    //        amountProduct[i] = 0;
+                    //      sumProducts += amountProduct[i];
+                    //    sumCount = prices[i] * amountProduct[i];
+//
+                    //                      System.out.println(products[i] + " " +
+                    //                            amountProduct[i] + " piece by " +
+                    //                          prices[i] + " rub/piece, " +
+                    //                        sumCount + " rub in total");
+                    //          }
+// Code end
+
                     if (amountProduct[i] != 0) {
                         sumCount = prices[i] * amountProduct[i];
                         System.out.println(products[i] + " " +
@@ -63,6 +78,7 @@ public class Main {
                 System.out.println("Total: " + sumProducts + " rub");
                 break;
             }
+
             try {
                 String[] parts = input.split(" ");
                 int numProd = Integer.parseInt(parts[0]) - 1;
@@ -76,7 +92,14 @@ public class Main {
                     amountProduct[numProd] = countProd; // Product[i] in basket equals zero
                     continue;
                 }
+
                 amountProduct[numProd] += countProd;
+
+                if (amountProduct[numProd] < 0) {
+                    amountProduct[numProd] -= countProd;
+                    System.out.println("there are not so many items in your cart");
+                    continue;
+                }
 
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("incorrect product number input or product quantity not entered");
@@ -84,7 +107,6 @@ public class Main {
                 System.out.println("only 'end' can be entered in letters");
             }
         }
-
     }
 
     static void shoppingCartEvent(int sumCountEvent, int i, int[] pricesEvent, String[] products,
